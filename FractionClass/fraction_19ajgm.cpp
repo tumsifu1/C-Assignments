@@ -3,7 +3,7 @@
 #include <iostream>
 #include <cstdlib>
 using namespace std;
-
+//
 //fraction exception
 FractionException::FractionException(const string& message) : message(message){
 }
