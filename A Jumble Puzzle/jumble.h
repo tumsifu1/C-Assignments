@@ -28,8 +28,7 @@ public:
     int getRowPos();
     int getColPos();
     char getDirection();
-
-    string getJumble();
+    charArrayPtr* getJumble() const; //returns coppy of the whole jumble
 };
 
 //exception class

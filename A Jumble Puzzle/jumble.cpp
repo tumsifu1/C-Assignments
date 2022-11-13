@@ -14,9 +14,32 @@ JumblePuzzle::JumblePuzzle(){
     direction = 0;
 }
 
+JumblePuzzle::JumblePuzzle(const JumblePuzzle& obj){
+    int i,j;
+    size = obj.size;
+    row = obj.col;
+    col = obj.row;
+    direction = obj.direction;
+
+    if(obj.getJumble()){
+        jumble = new char*[size];
+        for( i = 0; i < size; i++){
+            jumble[i] = new char[size];
+        }
+        for( i = 0; i < size; i++){
+            for(j = 0; j < size; j++){
+                jumble[i][j] = obj.getJumble()[i][j];
+            }
+        }
+
+    }
+
+}
+
 JumblePuzzle::JumblePuzzle(const string& hiddenWord, const string& diff){
     //seed the randomizer
     srand(time(NULL)); 
+    direction = 'n'; //placeholder 
     int randDir;
     string directions = "nsew"; //might not need
     int wordLength = hiddenWord.length();
@@ -127,14 +150,21 @@ int JumblePuzzle::getSize(){
 char JumblePuzzle::getDirection(){
     return direction;
 }
-/*
-char **JumblePuzzle::getJumble() const{
+
+charArrayPtr* JumblePuzzle::getJumble() const{
     charArrayPtr* jumbleCopy = new char*[size];
-
-    for(int i = 0; i < size; i ++){
-
+    int i,j;
+    for(i = 0; i < size; i ++){
+        jumbleCopy[i] = new char[size];
     }
-}*/
+
+    for(i = 0; i < size; i++){
+        for(j = 0; j < size; j++){
+            jumbleCopy[i][j] = jumble[i][j];
+        }
+    }
+    return jumbleCopy;
+}
 
 
 

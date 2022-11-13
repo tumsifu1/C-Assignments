@@ -12,7 +12,7 @@
 #include <string>
 #include <iostream>
 #include <ctime>
-#include "jumble.h"
+#include "jumble.cpp"
 using namespace std;
 
 // Displays the puzzle to the screen.
