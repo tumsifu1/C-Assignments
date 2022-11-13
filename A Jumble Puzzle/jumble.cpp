@@ -70,11 +70,17 @@ JumblePuzzle::JumblePuzzle(const string& hiddenWord, const string& diff){
     
     //allocate enough memory to the jumble
     jumble = new char*[size];
-    //build the jumble with random letters
+    
+    //provide the array enough size for each row
     int i,j;
     for(i = 0; i < size; i++){
-        for(i = 0; j < size; j++)
-            jumble[i][j] = rand() % (26 + 'a');
+        jumble[i] = new char[size];
+    }
+     //build the jumble with random letters
+    for(i = 0; i < size; i++){
+        for(j = 0; j < size; j++){
+            jumble[i][j] = rand() % 26 + 'a';
+        }
     }
     //set starting location of the jumble
     i = row;

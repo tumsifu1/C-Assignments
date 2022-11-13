@@ -10,7 +10,6 @@ private:
     int size;
     int row;
     int col;
-    string difficulty;
     charArrayPtr* jumble;
     char direction;
     char genRandomDirection();
