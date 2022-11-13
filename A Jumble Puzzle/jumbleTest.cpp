@@ -5,5 +5,5 @@
 using namespace std;
 
 int main(){
-    JumblePuzzle game1 = JumblePuzzle("batman", "easy");
+    cout<< "helo";
 }
