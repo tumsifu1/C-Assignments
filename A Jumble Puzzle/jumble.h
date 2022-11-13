@@ -3,19 +3,43 @@
 using namespace std;
 #pragma once
 
-class jumblePuzzle{
+typedef char* charArrayPtr;
+
+class JumblePuzzle{
 private:
     int size;
+    int row;
+    int col;
     string difficulty;
     string jumble;
+    charArrayPtr* jumble;
+    char direction;
+    char genRandomDirection();
     
 public:
-    int getSize();
-    string getJumble();
+
+    //default constructor
+    JumblePuzzle();
+    //constructor for the puzzle 
+    JumblePuzzle(const string& word, const string& difficulty);
+    //copy constructor
+    JumblePuzzle(const JumblePuzzle& Orginal);
 
     //getters
-    jumblePuzzle();
-    jumblePuzzle(string word, string difficulty);
-    jumblePuzzle(jumblePuzzle copy);
-    //constructors 
-}
+    int getSize();
+    int getRowPos();
+    int getColPos();
+    char getDirection();
+
+    string getJumble();
+};
+
+//exception class
+class BadJumbleException{
+public:
+    string what() const;
+    BadJumbleException(const string& msg);
+
+private:
+    string message;
+};
