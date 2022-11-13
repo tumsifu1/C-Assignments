@@ -15,6 +15,8 @@ JumblePuzzle::JumblePuzzle(){
 }
 
 JumblePuzzle::JumblePuzzle(const string& hiddenWord, const string& diff){
+    //seed the randomizer
+    srand(time(NULL)); 
     int randDir;
     string directions = "nsew"; //might not need
     int wordLength = hiddenWord.length();
@@ -125,8 +127,14 @@ int JumblePuzzle::getSize(){
 char JumblePuzzle::getDirection(){
     return direction;
 }
+/*
+char **JumblePuzzle::getJumble() const{
+    charArrayPtr* jumbleCopy = new char*[size];
 
+    for(int i = 0; i < size; i ++){
 
+    }
+}*/
 
 
 

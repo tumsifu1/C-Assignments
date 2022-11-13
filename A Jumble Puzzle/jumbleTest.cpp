@@ -8,4 +8,6 @@ int main(){
     JumblePuzzle* game1 = new JumblePuzzle("batman", "easy");
     cout<< "testing/n";
     cout<< game1->getRowPos();
+
+
 }
