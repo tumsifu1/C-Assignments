@@ -1,5 +1,7 @@
 //Aaron Moise 20214948
+#include <string>
 #include <iostream>
+#include <ctime>
 #include "jumble.h"
 using namespace std;
 
@@ -14,9 +16,8 @@ JumblePuzzle::JumblePuzzle(){
 
 JumblePuzzle::JumblePuzzle(const string& hiddenWord, const string& diff){
     int randDir;
-    string directions = "nsew";
+    string directions = "nsew"; //might not need
     int wordLength = hiddenWord.length();
-
 
     if(wordLength < 3 || wordLength > 10){
         throw BadJumbleException("Word should be between 3 and 10 letters");
@@ -38,7 +39,6 @@ JumblePuzzle::JumblePuzzle(const string& hiddenWord, const string& diff){
     //generating random column and row position between 0-size-1
     col = rand() % (size-1);
     row = rand() % (size -1);
-    
 
     //radom directions
     int directionNS[4] = {-1, 0, 1, 0};
@@ -46,22 +46,45 @@ JumblePuzzle::JumblePuzzle(const string& hiddenWord, const string& diff){
     
     //choose a random direction from north, east, south and west
     direction = directions[randVar];
-    //chose the placement of the word
+    //direction we will be incrementing the word in
     int nIncrement = directionNS[randVar];
     int eIncrement = directionEW[randVar];
+
+
     //if incrementing north to south make sure that there is enough space 
     if(nIncrement == 1){
-        row = rand() % (size-1) - wordLength;
+        row = rand() % ((size-1) - wordLength); //will this have enough space upwards
     }else if(nIncrement == 0){
-        row = rand() % (size - 1);
-    }else if(nIncrement == -1)
-    //if too far in a column
-    if(eIncrement == 1 || eIncrement == -1 ){
-        col = rand() % (size -1) - wordLength;
+        row = rand() % (size - 1); //this might only need to be (size)
+    }else if(nIncrement == -1){
+        row = rand() % ((size -1) - wordLength);
+    }
+    //if incrementing east to west make sure there is enough space
+    if(eIncrement == 1 ){
+        col = rand() % ((size -1) - wordLength);
     }else if(eIncrement == 0){
-        col = rand() % (size -1)
+        col = rand() % (size -1);
+    }else if(eIncrement == -1){
+        col = rand() % ((size -1) - wordLength);
     }
     
+    //allocate enough memory to the jumble
+    jumble = new char*[size];
+    //build the jumble with random letters
+    int i,j;
+    for(i = 0; i < size; i++){
+        for(i = 0; j < size; j++)
+            jumble[i][j] = rand() % (26 + 'a');
+    }
+    //set starting location of the jumble
+    i = row;
+    j = col;
+    //set the jumble to the hidden word
+    for(int k; k < wordLength; k++){
+        jumble[i][j] = hiddenWord[k];
+        i += nIncrement;
+        j += eIncrement;
+    }
 }
 /*
 

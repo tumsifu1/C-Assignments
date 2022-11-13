@@ -11,7 +11,6 @@ private:
     int row;
     int col;
     string difficulty;
-    string jumble;
     charArrayPtr* jumble;
     char direction;
     char genRandomDirection();
