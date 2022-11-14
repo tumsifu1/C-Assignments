@@ -39,8 +39,7 @@ JumblePuzzle::JumblePuzzle(const JumblePuzzle& obj){
 JumblePuzzle::JumblePuzzle(const string& hiddenWord, const string& diff){
     //seed the randomizer
     srand(time(NULL));  
-    int randDir;
-    string directions = "nsew"; //might not need
+    string directions = "nsew"; 
     int wordLength = hiddenWord.length();
 
     if(wordLength < 3 || wordLength > 10){
@@ -61,7 +60,7 @@ JumblePuzzle::JumblePuzzle(const string& hiddenWord, const string& diff){
    //choose random placement of hidden word
     col = rand() % (size-1);
     row = rand() % (size-1);
-    //
+
     //check there is enough space in the given direction
     bool placed = false;
 
@@ -155,7 +154,7 @@ charArrayPtr* JumblePuzzle::getJumble() const{
     return jumbleCopy;
 }
 
-//deconstructor
+//decstructor
 JumblePuzzle::~JumblePuzzle(){
     for(int i = (size-1); i >= 0; i--){
         //deallocate Heap meory
@@ -195,7 +194,7 @@ JumblePuzzle& JumblePuzzle::operator=(const JumblePuzzle& obj){
     }
     return *this;
 }
-
+//exception
 BadJumbleException::BadJumbleException(const string& msg){
     message = msg;
 }

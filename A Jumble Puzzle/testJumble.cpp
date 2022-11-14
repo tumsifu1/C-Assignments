@@ -12,7 +12,7 @@
 #include <string>
 #include <iostream>
 #include <ctime>
-#include "jumble.cpp"
+#include "jumble.h"//my linker is broken
 using namespace std;
 
 // Displays the puzzle to the screen.
@@ -161,6 +161,8 @@ void testJumble() {
 	cout<<"Direction: " << testOne.getDirection() <<endl;
 	cout<<"size should be 12: " << testOne.getSize() <<endl;
 
+
+	
 	//test exceptions
 	cout<<"\nTest exception handling" <<endl;
 	try{
@@ -181,14 +183,15 @@ void testJumble() {
 		cerr << e.what() << endl;
 	}
 
+
 } // end testJumble
 
 int main() {
 
-	//testJumble();
+	testJumble();
 
 	// Make sure your class works before you play the game!
-	playGame();
+	//playGame();
 
 	return 0;
 } // end main
