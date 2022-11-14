@@ -118,35 +118,20 @@ JumblePuzzle::JumblePuzzle(const string& hiddenWord, const string& diff){
     }
 }
 
-char JumblePuzzle::getDirection(){
-    switch(rand() % 4){
-        case 0:
-            return('n');
-            break;
-        case 1:
-            return('e');
-            break;
-        case 2:
-            return('s');
-            break;
-        case 3:
-            return('w');
-            break;
-    }
-}*/
-int JumblePuzzle::getColPos(){
+//getters
+int JumblePuzzle::getColPos() const{
     return col;
 }
 
-int JumblePuzzle::getRowPos(){
+int JumblePuzzle::getRowPos() const{
     return row;
 }
 
-int JumblePuzzle::getSize(){
+int JumblePuzzle::getSize() const{
     return size;
 }
 
-char JumblePuzzle::getDirection(){
+char JumblePuzzle::getDirection() const{
     return direction;
 }
 
@@ -165,9 +150,46 @@ charArrayPtr* JumblePuzzle::getJumble() const{
     return jumbleCopy;
 }
 
+//deconstructor
+JumblePuzzle::~JumblePuzzle(){
+    for(int i = (size-1); i >= 0; i--){
+        //deallocate Heap meory
+        delete[] jumble[i]; 
+        jumble[i] = NULL;
+    }
+    delete[] jumble;
+    jumble = NULL;
+}
 
+JumblePuzzle& JumblePuzzle::operator=(const JumblePuzzle& obj){
+    if(this != &obj){
+        int i,j;
+        //deallocate heap mem
+        for(i = size-1; i>=0 ; i--){
+            delete[] jumble[i];
+        }
+        delete[] jumble;
 
+        //assign varaibles and jumble
+        size = obj.getSize();
+        col = obj.getColPos();
+        row = obj.getRowPos();
+        direction = obj.getDirection();
 
+        if(obj.getJumble()){
+            jumble = new char*[size];
+            for(i =0; i<size; i++){
+                jumble[i] = new char[size];
+            }
+            for(i=0; i<size; i++){
+                for(j=0; j<size; j++){
+                    jumble[i][j];
+                }
+            }
+        }
+    }
+    return *this;
+}
 
 BadJumbleException::BadJumbleException(const string& msg){
     message = msg;

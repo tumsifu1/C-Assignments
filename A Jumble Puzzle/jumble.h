@@ -24,11 +24,17 @@ public:
     JumblePuzzle(const JumblePuzzle& Orginal);
 
     //getters
-    int getSize();
-    int getRowPos();
-    int getColPos();
-    char getDirection();
+    int getSize() const;
+    int getRowPos() const;
+    int getColPos() const;
+    char getDirection() const;
     charArrayPtr* getJumble() const; //returns coppy of the whole jumble
+
+    //deconstructor
+    virtual ~JumblePuzzle();
+
+    //assignment operator
+    JumblePuzzle& operator=(const JumblePuzzle& obj);
 };
 
 //exception class
