@@ -38,8 +38,7 @@ JumblePuzzle::JumblePuzzle(const JumblePuzzle& obj){
 
 JumblePuzzle::JumblePuzzle(const string& hiddenWord, const string& diff){
     //seed the randomizer
-    srand(time(NULL)); 
-    direction = 'n'; //placeholder 
+    srand(time(NULL));  
     int randDir;
     string directions = "nsew"; //might not need
     int wordLength = hiddenWord.length();
@@ -58,41 +57,46 @@ JumblePuzzle::JumblePuzzle(const string& hiddenWord, const string& diff){
     }else{
         throw BadJumbleException("Invalid difficult, difficulty must be easy, medium or hard");
     }
-    
-    int randVar = rand() % 4;
-    
-    //generating random column and row position between 0-size-1
+
+   //choose random placement of hidden word
     col = rand() % (size-1);
-    row = rand() % (size -1);
+    row = rand() % (size-1);
+    //
+    //check there is enough space in the given direction
+    bool placed = false;
 
-    //radom directions
-    int directionNS[4] = {-1, 0, 1, 0};
-    int directionEW[4] = {0, 1, 0, -1};
-    
-    //choose a random direction from north, east, south and west
-    direction = directions[randVar];
-    //direction we will be incrementing the word in
-    int nIncrement = directionNS[randVar];
-    int eIncrement = directionEW[randVar];
-
-
-    //if incrementing north to south make sure that there is enough space 
-    if(nIncrement == 1){
-        row = rand() % ((size-1) - wordLength); //will this have enough space upwards
-    }else if(nIncrement == 0){
-        row = rand() % (size - 1); //this might only need to be (size)
-    }else if(nIncrement == -1){
-        row = rand() % ((size -1) - wordLength);
+    while(placed == false){
+        if(direction == 's' && ((size-row) >= wordLength)){
+            placed = true;
+        }else if(direction == 'n' && (row >= wordLength)){
+            placed = true;
+        }else if(( direction == 'e') && (size - col >= wordLength )){
+            placed = true;
+        }else if(direction == 'w' && col >=wordLength){
+            placed = true;
+        }else{
+            direction = directions[(rand() % 3)];
+        }
     }
-    //if incrementing east to west make sure there is enough space
-    if(eIncrement == 1 ){
-        col = rand() % ((size -1) - wordLength);
-    }else if(eIncrement == 0){
-        col = rand() % (size -1);
-    }else if(eIncrement == -1){
-        col = rand() % ((size -1) - wordLength);
-    }
+
+
+    //direction of the jumble in numeric form
+    int nIncrement = 0;
+    int eIncrement = 0;
     
+    if(direction == 'n'){
+        nIncrement = -1;
+        eIncrement = 0;
+    }else if(direction == 's'){
+        nIncrement = 1;
+        eIncrement = 0;
+    }else if(direction == 'w'){
+        nIncrement = 0;
+        eIncrement = -1;
+    }else{
+        nIncrement = 0;
+        eIncrement = 1;
+    }
     //allocate enough memory to the jumble
     jumble = new char*[size];
     
@@ -110,8 +114,9 @@ JumblePuzzle::JumblePuzzle(const string& hiddenWord, const string& diff){
     //set starting location of the jumble
     i = row;
     j = col;
+    int k;
     //set the jumble to the hidden word
-    for(int k; k < wordLength; k++){
+    for(k = 0; k < wordLength; k++){
         jumble[i][j] = hiddenWord[k];
         i += nIncrement;
         j += eIncrement;
@@ -183,7 +188,7 @@ JumblePuzzle& JumblePuzzle::operator=(const JumblePuzzle& obj){
             }
             for(i=0; i<size; i++){
                 for(j=0; j<size; j++){
-                    jumble[i][j];
+                    jumble[i][j] = obj.getJumble()[i][j];
                 }
             }
         }

@@ -2,6 +2,7 @@
     "files.associations": {
         "type_traits": "c",
         "jumble.h": "c",
-        "ctime": "cpp"
+        "ctime": "cpp",
+        "iostream": "cpp"
     }
 }

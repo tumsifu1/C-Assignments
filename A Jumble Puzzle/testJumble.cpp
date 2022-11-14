@@ -152,14 +152,43 @@ void testJumble() {
 		JumblePuzzle jp("HIDDENWORD", "hard");
 	cout << "\nPassed memory leak test!" << endl;
 
+	//test accesors
+	cout <<"Test accesors" <<endl;
+	JumblePuzzle testOne("CODE", "medium");
+	showJumble(testOne.getJumble(), testOne.getSize());
+	cout<<"column: " << testOne.getColPos() <<endl;
+	cout<<"row: " << testOne.getRowPos() <<endl;
+	cout<<"Direction: " << testOne.getDirection() <<endl;
+	cout<<"size should be 12: " << testOne.getSize() <<endl;
+
+	//test exceptions
+	cout<<"\nTest exception handling" <<endl;
+	try{
+		JumblePuzzle testTwo("TEST", "5");
+	}catch( const BadJumbleException& e){
+		cerr << e.what() << endl;
+	}
+	//test word length exception
+	try{
+		JumblePuzzle testThree("TE", "easy");
+	}catch( const BadJumbleException& e){
+		cerr << e.what() << endl;
+	}
+
+	try{
+		JumblePuzzle testThree("TESTTESTEST", "easy");
+	}catch( const BadJumbleException& e){
+		cerr << e.what() << endl;
+	}
+
 } // end testJumble
 
 int main() {
 
-	testJumble();
+	//testJumble();
 
 	// Make sure your class works before you play the game!
-	//playGame();
+	playGame();
 
 	return 0;
 } // end main
