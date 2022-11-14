@@ -117,7 +117,6 @@ JumblePuzzle::JumblePuzzle(const string& hiddenWord, const string& diff){
         j += eIncrement;
     }
 }
-/*
 
 char JumblePuzzle::getDirection(){
     switch(rand() % 4){
